@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing in Action: from Policy to Practice</title>
+<style>
+    :root {
+      --se-green: #3dcd58;
+      --green-dark: #009530;
+      --green-soft: #ecfff0;
+      --blue: #42b4e6;
+      --blue-deep: #1686b8;
+      --blue-soft: #eaf8fd;
+      --grey-900: #22313a;
+      --grey-700: #4d5b63;
+      --grey-500: #77838a;
+      --grey-300: #d7dde1;
+      --grey-200: #e6eaed;
+      --grey-100: #f4f6f8;
+      --white: #ffffff;
+      --orange: #ff7a00;
+      --orange-soft: #fff4e8;
+      --shadow: 0 18px 45px rgba(34, 49, 58, 0.10);
+      --soft-shadow: 0 10px 28px rgba(34, 49, 58, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+      color: var(--grey-900);
+      background:
+        radial-gradient(circle at top left, rgba(61, 205, 88, 0.13), transparent 32rem),
+        linear-gradient(180deg, #ffffff 0%, var(--grey-100) 58%, #ffffff 100%);
+      line-height: 1.5;
+    }
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(230, 234, 237, 0.9);
+    }
+    .nav-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: fit-content;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--se-green), var(--green-dark));
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 22px rgba(0, 149, 48, 0.25);
+    }
+    .brand-text {
+      font-size: 14px;
+      color: var(--grey-700);
+      white-space: nowrap;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 13px;
+      color: var(--grey-700);
+      padding: 8px 11px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    nav a:hover { background: var(--green-soft); color: var(--green-dark); }
+    .review-top-button {
+      border: 0;
+      border-radius: 999px;
+      background: var(--grey-900);
+      color: var(--white);
+      padding: 9px 13px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 34px 22px 70px;
+    }
+    .review-section {
+      scroll-margin-top: 100px;
+      margin-top: 34px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(230, 234, 237, 0.95);
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      box-shadow: var(--soft-shadow);
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(61, 205, 88, 0.18), rgba(66, 180, 230, 0.10) 55%, rgba(255, 255, 255, 0.86)),
+        var(--white);
+      box-shadow: var(--shadow);
+      padding: 48px;
+      border: 1px solid rgba(61, 205, 88, 0.18);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      right: -140px;
+      top: -120px;
+      background: rgba(61, 205, 88, 0.18);
+      border-radius: 50%;
+      filter: blur(4px);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green-dark);
+      background: rgba(61, 205, 88, 0.14);
+      border: 1px solid rgba(61, 205, 88, 0.28);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 0.98;
+      letter-spacing: -1.5px;
+      color: var(--grey-900);
+    }
+    .hero-subtitle {
+      font-size: 22px;
+      color: var(--green-dark);
+      margin: 14px 0 18px;
+    }
+    .hero-text {
+      max-width: 760px;
+      font-size: 18px;
+      color: var(--grey-700);
+      margin: 0 0 24px;
+    }
+    .hero-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--grey-700);
+      padding: 11px 14px;
+      border-radius: 16px;
+      box-shadow: var(--soft-shadow);
+      border: 1px solid rgba(230, 234, 237, 0.9);
+      font-size: 14px;
+    }
+    .hero-note strong { color: var(--grey-900); }
+    .partner-lockup {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .partner-label {
+      font-size: 13px;
+      color: var(--grey-500);
+    }
+    .partner-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      box-shadow: 0 10px 22px rgba(34, 49, 58, 0.07);
+      font-size: 14px;
+      letter-spacing: 0.1px;
+    }
+    .partner-logo.se { color: var(--green-dark); border-color: rgba(61, 205, 88, 0.45); }
+    .partner-logo.sk { color: var(--grey-900); border-color: rgba(66, 180, 230, 0.45); }
+    .partner-plus { color: var(--grey-500); }
+
+    .info-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+    .info-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(230, 234, 237, 0.95);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--soft-shadow);
+    }
+    .info-card span { display: block; color: var(--grey-500); font-size: 12px; margin-bottom: 6px; }
+    .info-card strong { color: var(--grey-900); font-size: 17px; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .section-kicker {
+      color: var(--green-dark);
+      font-size: 13px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 38px);
+      letter-spacing: -0.7px;
+      line-height: 1.08;
+    }
+    .lead {
+      color: var(--grey-700);
+      font-size: 17px;
+      max-width: 860px;
+      margin: 0 0 20px;
+    }
+    .comment-action {
+      border: 1px solid rgba(61, 205, 88, 0.55);
+      background: var(--green-soft);
+      color: var(--green-dark);
+      padding: 8px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .comment-action:hover { background: var(--se-green); color: var(--white); }
+    .comment-count {
+      display: none;
+      min-width: 18px;
+      height: 18px;
+      margin-left: 6px;
+      border-radius: 50%;
+      background: var(--green-dark);
+      color: var(--white);
+      font-size: 11px;
+      line-height: 18px;
+      text-align: center;
+    }
+    .comment-action.has-comments .comment-count { display: inline-block; }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .benefit-card,
+    .role-card,
+    .module-card,
+    .contact-card,
+    .prereq-card {
+      border: 1px solid var(--grey-200);
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .benefit-icon,
+    .role-icon,
+    .prereq-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .benefit-card h3,
+    .role-card h3,
+    .module-card h3,
+    .contact-card h3,
+    .prereq-card h3 {
+      margin: 0 0 9px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+    .benefit-card p,
+    .role-card p,
+    .module-card p,
+    .contact-card p,
+    .prereq-card p {
+      margin: 0;
+      color: var(--grey-700);
+      font-size: 14px;
+    }
+
+    .audience-hero {
+      display: grid;
+      grid-template-columns: 1.1fr 1.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .audience-note {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft));
+      border: 1px solid rgba(61, 205, 88, 0.32);
+      padding: 22px;
+      color: var(--grey-700);
+    }
+    .audience-note strong { display: block; color: var(--grey-900); font-size: 21px; margin-bottom: 8px; }
+    .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .role-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .role-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--se-green), var(--blue));
+    }
+    .role-card ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: var(--grey-700);
+      font-size: 14px;
+    }
+    .role-card li { position: relative; padding-left: 20px; }
+    .role-card li::before {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      left: 0;
+      top: 0.65em;
+      border-radius: 50%;
+      background: var(--se-green);
+      box-shadow: 0 0 0 4px rgba(61, 205, 88, 0.12);
+    }
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .role-tags span {
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: var(--grey-100);
+      border: 1px solid var(--grey-200);
+      color: var(--grey-700);
+      font-size: 12px;
+    }
+
+    .format-visual {
+      border: 1px dashed rgba(61, 205, 88, 0.7);
+      background: linear-gradient(180deg, #ffffff 0%, #fafffb 100%);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+    }
+    .format-flow {
+      display: grid;
+      grid-template-columns: 140px repeat(4, 1fr) 150px;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .flow-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      padding: 16px 14px;
+      min-height: 166px;
+      box-shadow: 0 12px 28px rgba(34, 49, 58, 0.07);
+      display: flex;
+      flex-direction: column;
+    }
+    .flow-card.accent {
+      background: linear-gradient(160deg, var(--blue), #62caef);
+      color: var(--white);
+      border-color: transparent;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 21px;
+    }
+    .flow-card.final {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--orange);
+      border-color: rgba(255, 122, 0, 0.35);
+      background: #fffaf4;
+    }
+    .flow-card .module-label { color: var(--green-dark); font-size: 12px; margin-bottom: 5px; }
+    .flow-card h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      line-height: 1.18;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .step-list { display: grid; gap: 8px; margin-top: auto; }
+    .step-chip {
+      display: block;
+      border-radius: 12px;
+      padding: 8px 9px;
+      font-size: 12px;
+      background: var(--grey-100);
+      color: var(--grey-700);
+      border: 1px solid var(--grey-200);
+    }
+    .step-chip.green { color: var(--green-dark); background: var(--green-soft); border-color: rgba(61, 205, 88, 0.35); }
+    .step-chip.orange { color: #bf5b00; background: #fff4e8; border-color: rgba(255, 122, 0, 0.28); }
+    .layer-cards { margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .layer-card { background: var(--white); border: 1px solid var(--grey-200); border-radius: var(--radius-lg); padding: 18px; }
+    .layer-card strong { display: block; color: var(--green-dark); margin-bottom: 6px; }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .module-card { position: relative; overflow: hidden; }
+    .module-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--se-green), var(--blue));
+    }
+    .module-tag {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .module-card .module-summary {
+      min-height: 68px;
+      color: var(--grey-700);
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .tool-label {
+      color: var(--grey-500);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .tool-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tool-tags span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--grey-100);
+      color: var(--grey-700);
+      border: 1px solid var(--grey-200);
+      font-size: 12px;
+    }
+    .tool-tags span.key {
+      background: var(--green-soft);
+      color: var(--green-dark);
+      border-color: rgba(61, 205, 88, 0.35);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .tab-button {
+      border: 1px solid var(--grey-200);
+      background: var(--white);
+      color: var(--grey-700);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .tab-button.active { background: var(--se-green); border-color: var(--se-green); color: var(--white); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .calendar-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: var(--blue-soft);
+      border: 1px solid rgba(66, 180, 230, 0.30);
+      color: var(--grey-700);
+      font-size: 14px;
+    }
+    .calendar-note strong { color: var(--grey-900); }
+    .calendar-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: var(--white);
+      flex: 0 0 auto;
+      font-size: 18px;
+    }
+    .calendar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--grey-700);
+      font-size: 12px;
+    }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 11px; height: 11px; border-radius: 4px; background: var(--se-green); }
+    .legend-dot.homework { background: var(--blue); }
+    .legend-dot.practice { background: var(--orange); }
+    .calendar-view { display: grid; gap: 18px; }
+    .week-card {
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(34, 49, 58, 0.06);
+    }
+    .week-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: linear-gradient(90deg, var(--grey-100), #ffffff);
+      border-bottom: 1px solid var(--grey-200);
+      color: var(--grey-700);
+      font-size: 14px;
+    }
+    .week-title strong { color: var(--grey-900); }
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      min-width: 0;
+    }
+    .day-cell {
+      min-height: 128px;
+      padding: 12px;
+      border-right: 1px solid var(--grey-200);
+      background: #ffffff;
+    }
+    .day-cell:last-child { border-right: 0; }
+    .day-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--grey-500);
+      font-size: 12px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(230, 234, 237, 0.75);
+      padding-bottom: 8px;
+    }
+    .day-head strong { color: var(--grey-900); font-size: 14px; }
+    .event-list { display: grid; gap: 7px; }
+    .event-pill {
+      border-left: 4px solid var(--se-green);
+      background: var(--green-soft);
+      color: var(--grey-900);
+      border-radius: 10px;
+      padding: 8px 9px;
+      font-size: 12px;
+      box-shadow: 0 5px 14px rgba(34, 49, 58, 0.05);
+    }
+    .event-pill.homework { border-left-color: var(--blue); background: var(--blue-soft); }
+    .event-pill.practice { border-left-color: var(--orange); background: var(--orange-soft); }
+    .event-pill.final { border-left-color: var(--grey-900); background: var(--grey-100); }
+    .event-pill span { display: block; color: var(--grey-700); margin-top: 2px; }
+    .empty-day {
+      color: var(--grey-300);
+      font-size: 12px;
+      margin-top: 18px;
+    }
+    .calendar-scroll { overflow-x: auto; border-radius: var(--radius-lg); }
+    .calendar-view:not(.calendar-expanded) .calendar-scroll.extra-week { display: none; }
+    .calendar-expand-control { display: flex; justify-content: center; margin-top: 18px; }
+    .expand-calendar-button {
+      border: 1px solid rgba(61, 205, 88, 0.45);
+      background: var(--white);
+      color: var(--green-dark);
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      box-shadow: 0 10px 22px rgba(34, 49, 58, 0.06);
+    }
+    .expand-calendar-button:hover { background: var(--green-soft); }
+    .final-review {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--green-soft);
+      border: 1px solid rgba(61, 205, 88, 0.35);
+      color: var(--grey-700);
+    }
+    .final-review strong { color: var(--grey-900); }
+
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .prereq-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 235px;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at top right, rgba(61, 205, 88, 0.12), transparent 9rem),
+        var(--white);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .prereq-card:hover { transform: translateY(-2px); box-shadow: var(--soft-shadow); }
+    .prereq-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+    .prereq-icon {
+      width: 54px;
+      height: 54px;
+      margin: 0;
+      background: linear-gradient(135deg, var(--se-green), var(--green-dark));
+      color: var(--white);
+      font-size: 17px;
+      flex: 0 0 auto;
+    }
+    .prereq-badge {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue-deep);
+      border: 1px solid rgba(66, 180, 230, 0.25);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .button-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin-top: auto;
+      padding: 10px 13px;
+      min-height: 44px;
+      border-radius: 999px;
+      background: var(--grey-900);
+      color: var(--white);
+      font-size: 13px;
+    }
+    .button-link:hover { background: var(--green-dark); }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 660px;
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft));
+    }
+    .avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--se-green), var(--green-dark));
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+    .email-link {
+      color: var(--green-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 149, 48, 0.32);
+    }
+    footer {
+      max-width: var(--max-width);
+      margin: 34px auto 0;
+      padding: 0 22px 36px;
+      color: var(--grey-500);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .comment-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(440px, 100vw);
+      height: 100vh;
+      background: var(--white);
+      z-index: 60;
+      box-shadow: -16px 0 40px rgba(34, 49, 58, 0.18);
+      transform: translateX(105%);
+      transition: transform 0.24s ease;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--grey-200);
+    }
+    .comment-drawer.open { transform: translateX(0); }
+    .drawer-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--grey-200);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .drawer-header h2 { font-size: 23px; margin: 0 0 4px; }
+    .drawer-header p { margin: 0; color: var(--grey-700); font-size: 13px; }
+    .drawer-close {
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--grey-100);
+      color: var(--grey-900);
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .drawer-body { padding: 20px; overflow-y: auto; display: grid; gap: 18px; }
+    .comment-form {
+      display: grid;
+      gap: 11px;
+      padding: 16px;
+      border: 1px solid var(--grey-200);
+      background: var(--grey-100);
+      border-radius: var(--radius-lg);
+    }
+    label { display: grid; gap: 6px; font-size: 13px; color: var(--grey-700); }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--grey-200);
+      border-radius: 12px;
+      padding: 10px 11px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: var(--grey-900);
+      background: var(--white);
+    }
+    textarea { min-height: 112px; resize: vertical; }
+    .drawer-actions { display: grid; gap: 10px; }
+    .primary-button, .secondary-button, .danger-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .primary-button { background: var(--se-green); color: var(--white); }
+    .secondary-button { background: var(--grey-900); color: var(--white); }
+    .danger-button { background: #fff1f1; color: #b42318; border: 1px solid #ffd1d1; }
+    .comment-list { display: grid; gap: 12px; }
+    .comment-item { border: 1px solid var(--grey-200); background: var(--white); border-radius: 16px; padding: 14px; }
+    .comment-meta { color: var(--grey-500); font-size: 12px; margin-bottom: 8px; }
+    .comment-item strong { color: var(--green-dark); }
+    .comment-item p { margin: 0; color: var(--grey-700); font-family: Arial, Helvetica, sans-serif; white-space: pre-wrap; }
+    .comment-delete { margin-top: 10px; border: 0; background: transparent; color: #b42318; cursor: pointer; font-size: 12px; padding: 0; font-family: inherit; }
+    .empty-comments { color: var(--grey-500); background: var(--grey-100); border: 1px dashed var(--grey-200); border-radius: 16px; padding: 14px; font-size: 13px; }
+    .drawer-small-note { color: var(--grey-500); font-size: 12px; line-height: 1.45; margin: 0; }
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(34, 49, 58, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+      z-index: 50;
+    }
+    .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 980px) {
+      .nav-wrap { align-items: flex-start; flex-direction: column; }
+      nav { width: 100%; }
+      .hero { padding: 34px 24px; }
+      .info-grid, .cards-3, .prereq-grid, .module-grid, .layer-cards, .audience-hero, .role-grid { grid-template-columns: 1fr; }
+      .format-visual { overflow-x: auto; }
+      .format-flow { min-width: 920px; }
+    }
+    @media (max-width: 640px) {
+      .page { padding-left: 14px; padding-right: 14px; }
+      .hero, .review-section { border-radius: 22px; }
+      .review-section { padding: 22px; }
+      .section-header { flex-direction: column; }
+      .contact-card { align-items: flex-start; flex-direction: column; }
+      .week-grid { min-width: 680px; }
+    }
+    @media print {
+      .topbar, .comment-action, .comment-drawer, .drawer-backdrop, .review-top-button { display: none !important; }
+      body { background: #ffffff; }
+      .review-section, .hero { box-shadow: none; break-inside: avoid; }
+      .calendar-scroll { overflow: visible; }
+      .calendar-view .calendar-scroll.extra-week { display: block !important; }
+      .calendar-expand-control { display: none !important; }
+    }
+  </style>
+</head>
+<body data-page-id="pricing-in-action-review-v3">
+<header class="topbar">
+<div class="nav-wrap">
+<div class="brand">
+<div class="brand-mark">SE</div>
+<div class="brand-text">Internal training page</div>
+</div>
+<nav aria-label="Page navigation">
+<a href="#about">About</a>
+<a href="#audience">Audience</a>
+<a href="#format">Format</a>
+<a href="#snapshot">Modules</a>
+<a href="#timing">Timing</a>
+<a href="#prerequisites">Pre-work</a>
+<a href="#contact">Contact</a>
+</nav>
+<button class="review-top-button" id="open-comments-top" type="button">Review comments</button>
+</div>
+</header>
+<main class="page">
+<section class="hero review-section" data-section-title="Hero / landing section" id="home">
+<div class="section-header" style="margin-bottom: 0;">
+<div class="hero-content">
+<div class="eyebrow">First cohort · CEE + Iberia</div>
+<h1>Pricing in Action:<br/>from Policy to Practice</h1>
+<div class="hero-subtitle">Pricing &amp; Commercial Policy Training</div>
+<p class="hero-text">A practical training program designed to help teams apply Pricing &amp; Commercial Policy in daily business decisions by strengthening key pricing concepts, working on real cases and exchanging with peers.</p>
+<div class="hero-note"><strong>Designed by Schneider Electric &amp; Simon-Kucher</strong> · global pricing consultancy</div>
+<div aria-label="Schneider Electric and Simon-Kucher" class="partner-lockup">
+
+<span class="partner-logo se">Schneider Electric</span>
+<span class="partner-plus">+</span>
+<span class="partner-logo sk">Simon-Kucher</span>
+</div>
+</div>
+<button class="comment-action" data-comment-target="home" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<div aria-label="Key training information" class="info-grid">
+<div class="info-card"><span>Scope</span><strong>Europe Operations</strong></div>
+<div class="info-card"><span>Business scope</span><strong>Transactional</strong></div>
+<div class="info-card"><span>First cohort</span><strong>CEE + Iberia</strong></div>
+<div class="info-card"><span>Format</span><strong>Virtual modules + Live exercises</strong></div>
+</div>
+</section>
+<section class="review-section" data-section-title="About the training" id="about">
+<div class="section-header">
+<div>
+<div class="section-kicker">01 · About</div>
+<h2>From rules and concepts to daily execution</h2>
+</div>
+<button class="comment-action" data-comment-target="about" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<p class="lead">
+        This program is designed to help teams turn Pricing &amp; Commercial Policy into concrete business decisions. The focus is practical: you will work with your country data and cases, apply pricing logic through exercises, and define actions that can be used after the training.
+      </p>
+<div class="cards-3">
+<article class="benefit-card">
+<div class="benefit-icon">✓</div>
+<h3>Understand key pricing concepts</h3>
+<p>Refresh the key pricing logic and connect it to SE ways of working.</p>
+</article>
+<article class="benefit-card">
+<div class="benefit-icon">↗</div>
+<h3>Apply to country cases</h3>
+<p>Work with your country data, practical cases and actions that can be used in business reviews.</p>
+</article>
+<article class="benefit-card">
+<div class="benefit-icon">∞</div>
+<h3>Build execution consistency</h3>
+<p>Exchange with peers and strengthen alignment across countries and roles.</p>
+</article>
+</div>
+</section>
+<section class="review-section" data-section-title="Target audience" id="audience">
+<div class="section-header">
+<div>
+<div class="section-kicker">02 · Audience</div>
+<h2>Who is it for?</h2>
+</div>
+<button class="comment-action" data-comment-target="audience" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<div class="audience-hero">
+<div class="audience-note">
+<strong>Designed for operational teams</strong>
+          Teams involved in Pricing &amp; Commercial Policy execution, pricing routines and performance follow-up.
+        </div>
+<div class="role-grid">
+<article class="role-card">
+<div class="role-icon">M</div>
+<h3>Management layer</h3>
+<p>For Business VPs, Country General Managers and Zone Pricing Leaders. Helps leaders define priorities, challenge action plans and decide on exception logic.</p>
+
+<div aria-label="Management layer roles" class="role-tags"><span>Business VPs</span><span>Country General Managers</span><span>Zone Pricing Leaders</span></div>
+</article>
+<article class="role-card">
+<div class="role-icon">O</div>
+<h3>Operational layer</h3>
+<p>For Marketing Directors, Sales Directors, Offer and Channel Marketing Managers and Local Pricing Champions. Helps teams translate strategy into execution and follow-up actions.</p>
+
+<div aria-label="Operational layer roles" class="role-tags"><span>Marketing Directors</span><span>Sales Directors</span><span>Offer &amp; Channel Marketing Managers</span><span>Local Pricing Champions</span></div>
+</article>
+</div>
+</div>
+</section>
+<section class="review-section" data-section-title="Training format" id="format">
+<div class="section-header">
+<div>
+<div class="section-kicker">03 · Format</div>
+<h2>Virtual, practical and exercise-oriented</h2>
+</div>
+<button class="comment-action" data-comment-target="format" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<p class="lead">
+        The training is structured around four modules, with two participant layers and the same learning rhythm: theory, homework and practice sharing.
+      </p>
+<div aria-label="Training format visual" class="format-visual">
+<div class="format-flow">
+<div class="flow-card accent"><strong>30-min<br/>kick-off call</strong></div>
+<div class="flow-card">
+<div class="module-label">Module 1</div>
+<h3>Price Strategy</h3>
+<div class="step-list">
+<span class="step-chip green">Theory + live exercise · 1–1.5 h</span>
+<span class="step-chip">Homework · 1–1.5 h</span>
+<span class="step-chip orange">Practice sharing · 1 h</span>
+</div>
+</div>
+<div class="flow-card">
+<div class="module-label">Module 2</div>
+<h3>Price Setting</h3>
+<div class="step-list">
+<span class="step-chip green">Theory + live exercise · 1–1.5 h</span>
+<span class="step-chip">Homework · 1–1.5 h</span>
+<span class="step-chip orange">Practice sharing · 1 h</span>
+</div>
+</div>
+<div class="flow-card">
+<div class="module-label">Module 3</div>
+<h3>Price &amp; SPA Governance</h3>
+<div class="step-list">
+<span class="step-chip green">Theory + live exercise · 1–1.5 h</span>
+<span class="step-chip">Homework · 1–1.5 h</span>
+<span class="step-chip orange">Practice sharing · 1 h</span>
+</div>
+</div>
+<div class="flow-card">
+<div class="module-label">Module 4</div>
+<h3>Price Animation &amp; Execution</h3>
+<div class="step-list">
+<span class="step-chip green">Theory + live exercise · 1–1.5 h</span>
+<span class="step-chip">Homework · 1–1.5 h</span>
+<span class="step-chip orange">Practice sharing · 1 h</span>
+</div>
+</div>
+<div class="flow-card final"><strong>Final presentation<br/>/ consolidated review</strong></div>
+</div>
+<div class="layer-cards">
+<div class="layer-card"><strong>Management layer</strong>Challenge, validate and support the country action plans.</div>
+<div class="layer-card"><strong>Operational layer</strong>Work through exercises, outputs and practical execution actions.</div>
+</div>
+</div>
+</section>
+<section class="review-section" data-section-title="Training snapshot" id="snapshot">
+<div class="section-header">
+<div>
+<div class="section-kicker">04 · Modules</div>
+<h2>Training snapshot</h2>
+</div>
+<button class="comment-action" data-comment-target="snapshot" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<div class="module-grid">
+<article class="module-card">
+<span class="module-tag">Module 1</span>
+<h3>Price Strategy</h3>
+<p class="module-summary">How to choose the right pricing battle by basket for your market and translate it into actions.</p>
+<div class="tool-label">Concepts / tools</div>
+<div class="tool-tags"><span class="key">Pricing Strategy Matrix</span><span>Pricing market / basket</span><span>Pricing power</span><span>Price Waterfall</span><span>Delta P / BU-Ops handshake</span></div>
+</article>
+<article class="module-card">
+<span class="module-tag">Module 2</span>
+<h3>Price Setting</h3>
+<p class="module-summary">Do not apply the same increase everywhere; learn how to differentiate by cost, pricing power, value and product price sensitivity.</p>
+<div class="tool-label">Concepts / tools</div>
+<div class="tool-tags"><span class="key">5-step approach</span><span>GRT</span><span>Price corridors</span><span>Price Index</span><span>LPO</span></div>
+</article>
+<article class="module-card">
+<span class="module-tag">Module 3</span>
+<h3>Price &amp; SPA Governance</h3>
+<p class="module-summary">Stop giving away margin too easily through discounts/SPAs and make pricing ownership clear.</p>
+<div class="tool-label">Concepts / tools</div>
+<div class="tool-tags"><span class="key">Concession Matrix</span><span>SPA Width</span><span>SPA Depth</span><span>Pricing ownership</span><span>Approval / escalation rules</span></div>
+</article>
+<article class="module-card">
+<span class="module-tag">Module 4</span>
+<h3>Price Animation &amp; Execution</h3>
+<p class="module-summary">What are the key pricing KPIs, how to read them, how they are interconnected and what to pay attention to during reviews.</p>
+<div class="tool-label">Concepts / tools</div>
+<div class="tool-tags"><span class="key">Delta Price</span><span>Price Realization</span><span>EMNP / corridor</span><span>SPA Width / Depth</span><span>Action plan</span></div>
+</article>
+</div>
+</section>
+<section class="review-section" data-section-title="Timing" id="timing">
+<div class="section-header">
+<div>
+<div class="section-kicker">05 · Timing</div>
+<h2>Training calendar</h2>
+</div>
+<button class="comment-action" data-comment-target="timing" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<div class="calendar-note">
+<div class="calendar-icon">▣</div>
+<div><strong>Calendar blockers will be sent separately by Anastasia Lomteva.</strong><br/>Check your Outlook calendar for invitations.</div>
+</div>
+<div aria-label="Training calendars" class="tabs" role="tablist">
+<button class="tab-button active" data-tab="ops" type="button">Operational groups</button>
+<button class="tab-button" data-tab="management" type="button">Management group</button>
+</div>
+<div aria-label="Calendar legend" class="calendar-legend">
+<span class="legend-item"><span class="legend-dot"></span>Theory + live exercise</span>
+<span class="legend-item"><span class="legend-dot homework"></span>Homework</span>
+<span class="legend-item"><span class="legend-dot practice"></span>Practice sharing / review</span>
+</div>
+<div class="tab-panel active" id="tab-ops">
+<div class="calendar-view">
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 29 June 2026</strong><span>Module 1 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>29 Jun</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>30 Jun</span></div><div class="event-list"><div class="event-pill">Ops G1 · Module 1 Theory<span>Price Strategy</span></div><div class="event-pill">Ops G2 · Module 1 Theory<span>Price Strategy</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>1 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>2 Jul</span></div><div class="event-list"><div class="event-pill">Ops G3 · Module 1 Theory<span>Price Strategy</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>3 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 6 July 2026</strong><span>Module 1 homework + sharing</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>6 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>7 Jul</span></div><div class="event-list"><div class="event-pill homework">Ops G1 · Module 1 Homework</div><div class="event-pill homework">Ops G2 · Module 1 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>8 Jul</span></div><div class="event-list"><div class="event-pill homework">Ops G3 · Module 1 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>9 Jul</span></div><div class="event-list"><div class="event-pill practice">Ops G1–G3 · Module 1 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>10 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 13 July 2026</strong><span>Module 2 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>13 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>14 Jul</span></div><div class="event-list"><div class="event-pill">Ops G1 · Module 2 Theory<span>Price Setting</span></div><div class="event-pill">Ops G2 · Module 2 Theory<span>Price Setting</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>15 Jul</span></div><div class="event-list"><div class="event-pill">Ops G3 · Module 2 Theory<span>Price Setting</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>16 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>17 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 20 July 2026</strong><span>Module 2 homework + sharing</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>20 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>21 Jul</span></div><div class="event-list"><div class="event-pill homework">Ops G1 · Module 2 Homework</div><div class="event-pill homework">Ops G2 · Module 2 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>22 Jul</span></div><div class="event-list"><div class="event-pill homework">Ops G3 · Module 2 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>23 Jul</span></div><div class="event-list"><div class="event-pill practice">Ops G1–G3 · Module 2 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>24 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 21 September 2026</strong><span>Module 3 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>21 Sep</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>22 Sep</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>23 Sep</span></div><div class="event-list"><div class="event-pill">Ops G1 · Module 3 Theory<span>Price &amp; SPA Governance</span></div><div class="event-pill">Ops G2 · Module 3 Theory<span>Price &amp; SPA Governance</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>24 Sep</span></div><div class="event-list"><div class="event-pill">Ops G3 · Module 3 Theory<span>Price &amp; SPA Governance</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>25 Sep</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 28 September 2026</strong><span>Module 3 homework</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>28 Sep</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>29 Sep</span></div><div class="event-list"><div class="event-pill homework">Ops G1 · Module 3 Homework</div><div class="event-pill homework">Ops G2 · Module 3 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>30 Sep</span></div><div class="event-list"><div class="event-pill homework">Ops G3 · Module 3 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>1 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>2 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 5 October 2026</strong><span>Module 3 sharing</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>5 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>6 Oct</span></div><div class="event-list"><div class="event-pill practice">Ops G1–G3 · Module 3 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>7 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>8 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>9 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 12 October 2026</strong><span>Module 4 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>12 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>13 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>14 Oct</span></div><div class="event-list"><div class="event-pill">Ops G1 · Module 4 Theory<span>Price Animation &amp; Execution</span></div><div class="event-pill">Ops G2 · Module 4 Theory<span>Price Animation &amp; Execution</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>15 Oct</span></div><div class="event-list"><div class="event-pill">Ops G3 · Module 4 Theory<span>Price Animation &amp; Execution</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>16 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 19 October 2026</strong><span>Module 4 homework + action pack</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>19 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>20 Oct</span></div><div class="event-list"><div class="event-pill homework">Ops G1 · Module 4 Homework</div><div class="event-pill homework">Ops G2 · Module 4 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>21 Oct</span></div><div class="event-list"><div class="event-pill homework">Ops G3 · Module 4 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>22 Oct</span></div><div class="event-list"><div class="event-pill practice">Ops G1–G3 · Module 4 Practice / Action Pack</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>23 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+</div><div class="calendar-expand-control"><button class="expand-calendar-button" data-expand-calendar="ops" type="button">See full calendar</button></div>
+</div>
+<div class="tab-panel" id="tab-management">
+<div class="calendar-view">
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 13 July 2026</strong><span>Management · Module 1 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>13 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>14 Jul</span></div><div class="event-list"><div class="event-pill">Management · Module 1 Theory<span>Price Strategy</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>15 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>16 Jul</span></div><div class="event-list"><div class="event-pill homework">Management · Module 1 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>17 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 20 July 2026</strong><span>Management · Module 1 sharing</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>20 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>21 Jul</span></div><div class="event-list"><div class="event-pill practice">Management · Module 1 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>22 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>23 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>24 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll">
+<article class="week-card">
+<div class="week-title"><strong>Week of 27 July 2026</strong><span>Management · Module 2</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>27 Jul</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>28 Jul</span></div><div class="event-list"><div class="event-pill">Management · Module 2 Theory<span>Price Setting</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>29 Jul</span></div><div class="event-list"><div class="event-pill homework">Management · Module 2 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>30 Jul</span></div><div class="event-list"><div class="event-pill practice">Management · Module 2 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>31 Jul</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 5 October 2026</strong><span>Management · Module 3 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>5 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>6 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>7 Oct</span></div><div class="event-list"><div class="event-pill">Management · Module 3 Theory<span>Price &amp; SPA Governance</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>8 Oct</span></div><div class="event-list"><div class="event-pill homework">Management · Module 3 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>9 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 12 October 2026</strong><span>Management · Module 3 sharing</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>12 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>13 Oct</span></div><div class="event-list"><div class="event-pill practice">Management · Module 3 Practice Sharing</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>14 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>15 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>16 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 26 October 2026</strong><span>Management · Module 4 starts</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>26 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>27 Oct</span></div><div class="event-list"><div class="event-pill">Management · Module 4 Theory<span>Price Animation &amp; Execution</span></div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>28 Oct</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>29 Oct</span></div><div class="event-list"><div class="event-pill homework">Management · Module 4 Homework</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>30 Oct</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+<div class="calendar-scroll extra-week">
+<article class="week-card">
+<div class="week-title"><strong>Week of 2 November 2026</strong><span>Close-out</span></div>
+<div class="week-grid">
+<div class="day-cell"><div class="day-head"><strong>Mon</strong><span>2 Nov</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Tue</strong><span>3 Nov</span></div><div class="event-list"><div class="event-pill practice">Management · Module 4 Practice / Action Pack</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Wed</strong><span>4 Nov</span></div><div class="empty-day">No session</div></div>
+<div class="day-cell"><div class="day-head"><strong>Thu</strong><span>5 Nov</span></div><div class="event-list"><div class="event-pill final">Final presentation / consolidated review</div></div></div>
+<div class="day-cell"><div class="day-head"><strong>Fri</strong><span>6 Nov</span></div><div class="empty-day">No session</div></div>
+</div>
+</article>
+</div>
+</div><div class="calendar-expand-control"><button class="expand-calendar-button" data-expand-calendar="management" type="button">See full calendar</button></div>
+</div>
+<div class="final-review"><strong>Final presentation / consolidated review:</strong> 5 November 2026</div>
+</section>
+<section class="review-section" data-section-title="Pre-requisite materials" id="prerequisites">
+<div class="section-header">
+<div>
+<div class="section-kicker">06 · Optional pre-work</div>
+<h2>Pre-requisite materials</h2>
+</div>
+<button class="comment-action" data-comment-target="prerequisites" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<p class="lead">These materials are optional, but recommended if you would like to refresh the basics before the training.</p>
+<div class="prereq-grid">
+<article class="prereq-card">
+<div class="prereq-top">
+<div class="prereq-icon">S</div>
+<span class="prereq-badge">Sales</span>
+</div>
+<h3>For Sales</h3>
+<p>Pricing and Commercial Policy basics for sales teams involved in transactional execution.</p>
+<a class="button-link" href="https://schneider-electric.csod.com/ui/lms-learning-details/app/curriculum/d08a4fd7-b95d-4ffb-b29e-7f5f533a75d0" rel="noopener" target="_blank">Open MLL curriculum</a>
+</article>
+<article class="prereq-card">
+<div class="prereq-top">
+<div class="prereq-icon">CM</div>
+<span class="prereq-badge">Channel</span>
+</div>
+<h3>For Channel Managers</h3>
+<p>Pricing and Commercial Policy basics for channel management and partner-related pricing routines.</p>
+<a class="button-link" href="https://schneider-electric.csod.com/ui/lms-learning-details/app/curriculum/44c00c45-30ae-4f07-97a2-7bc8fe29ffe7" rel="noopener" target="_blank">Open MLL curriculum</a>
+</article>
+<article class="prereq-card">
+<div class="prereq-top">
+<div class="prereq-icon">OM</div>
+<span class="prereq-badge">Offer</span>
+</div>
+<h3>For Offer Managers</h3>
+<p>Pricing and Commercial Policy basics for offer teams supporting list price and portfolio decisions.</p>
+<a class="button-link" href="https://schneider-electric.csod.com/ui/lms-learning-details/app/curriculum/4ad35493-9a22-4bbb-8f94-c463d78a0317" rel="noopener" target="_blank">Open MLL curriculum</a>
+</article>
+</div>
+</section>
+<section class="review-section" data-section-title="Contact information" id="contact">
+<div class="section-header">
+<div>
+<div class="section-kicker">07 · Contact</div>
+<h2>Questions?</h2>
+</div>
+<button class="comment-action" data-comment-target="contact" type="button">Add comment<span class="comment-count">0</span></button>
+</div>
+<div class="contact-card">
+<div class="avatar">AL</div>
+<div>
+<h3>Anastasia Lomteva</h3>
+<p>For any question regarding the training organization, calendar blockers or practical details, please contact Anastasia.</p>
+<p style="margin-top: 10px;"><a class="email-link" href="mailto:anastasia.lomteva@se.com">anastasia.lomteva@se.com</a></p>
+</div>
+</div>
+</section>
+</main>
+<footer>
+    Pricing in Action: from Policy to Practice · First cohort · Internal training page
+  </footer>
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside aria-label="Review comments panel" class="comment-drawer" id="comment-drawer">
+<div class="drawer-header">
+<div>
+<h2>Review comments</h2>
+<p>Add comments by section, then download the reviewed HTML file and send it back.</p>
+</div>
+<button aria-label="Close comments panel" class="drawer-close" id="close-comments" type="button">×</button>
+</div>
+<div class="drawer-body">
+<form class="comment-form" id="comment-form">
+<label>
+          Section
+          <select id="comment-section" required=""><option value="home">Hero / landing section</option><option value="about">About the training</option><option value="audience">Target audience</option><option value="format">Training format</option><option value="snapshot">Training snapshot</option><option value="timing">Timing</option><option value="prerequisites">Pre-requisite materials</option><option value="contact">Contact information</option></select>
+</label>
+<label>
+          Your name
+          <input id="comment-author" placeholder="Name" type="text"/>
+</label>
+<label>
+          Comment
+          <textarea id="comment-text" placeholder="Write your comment here..." required=""></textarea>
+</label>
+<button class="primary-button" type="submit">Save comment</button>
+</form>
+<div class="drawer-actions">
+<button class="secondary-button" id="download-reviewed-html" type="button">Download reviewed HTML</button>
+<button class="danger-button" id="clear-comments" type="button">Clear all comments</button>
+</div>
+<p class="drawer-small-note">
+        Comments are saved in your browser while you review. The “Download reviewed HTML” button creates a new .htm file with comments embedded, so it can be sent back for review.
+      </p>
+<div>
+<h3 style="margin: 0 0 10px;">Saved comments</h3>
+<div class="comment-list" id="comment-list"><div class="empty-comments">No comments yet.</div></div>
+</div>
+</div>
+</aside>
+<script id="initial-comments-data" type="application/json">[]</script>
+<script>
+    (function () {
+      const pageId = document.body.getAttribute('data-page-id') || 'pricing-in-action-review';
+      const storageKey = pageId + ':comments';
+      const authorKey = pageId + ':author';
+      const drawer = document.getElementById('comment-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const sectionSelect = document.getElementById('comment-section');
+      const authorInput = document.getElementById('comment-author');
+      const commentText = document.getElementById('comment-text');
+      const commentList = document.getElementById('comment-list');
+      const form = document.getElementById('comment-form');
+
+      function readEmbeddedComments() {
+        const dataNode = document.getElementById('initial-comments-data');
+        if (!dataNode) return [];
+        try {
+          const parsed = JSON.parse(dataNode.textContent || '[]');
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function loadComments() {
+        try {
+          const saved = localStorage.getItem(storageKey);
+          if (saved) return JSON.parse(saved);
+        } catch (error) {}
+        return readEmbeddedComments();
+      }
+
+      let comments = loadComments();
+
+      function saveComments() {
+        try { localStorage.setItem(storageKey, JSON.stringify(comments)); } catch (error) {}
+      }
+
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function sectionTitle(sectionId) {
+        const section = document.getElementById(sectionId);
+        return section ? section.getAttribute('data-section-title') || sectionId : sectionId;
+      }
+
+      function populateSectionSelect() {
+        const sections = Array.from(document.querySelectorAll('.review-section[id]'));
+        sectionSelect.innerHTML = sections.map(section => {
+          const id = section.id;
+          const title = section.getAttribute('data-section-title') || id;
+          return `<option value="${escapeHtml(id)}">${escapeHtml(title)}</option>`;
+        }).join('');
+      }
+
+      function openDrawer(sectionId) {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        if (sectionId) sectionSelect.value = sectionId;
+        setTimeout(() => commentText.focus(), 120);
+      }
+
+      function closeDrawer() {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+      }
+
+      function updateCommentBadges() {
+        document.querySelectorAll('.comment-action[data-comment-target]').forEach(button => {
+          const target = button.getAttribute('data-comment-target');
+          const count = comments.filter(comment => comment.section === target).length;
+          const badge = button.querySelector('.comment-count');
+          button.classList.toggle('has-comments', count > 0);
+          if (badge) badge.textContent = count;
+        });
+      }
+
+      function renderComments() {
+        if (!comments.length) {
+          commentList.innerHTML = '<div class="empty-comments">No comments yet.</div>';
+          updateCommentBadges();
+          return;
+        }
+        const sorted = comments.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        commentList.innerHTML = sorted.map(comment => {
+          const date = comment.createdAt ? new Date(comment.createdAt).toLocaleString() : '';
+          return `
+            <article class="comment-item">
+              <div class="comment-meta"><strong>${escapeHtml(sectionTitle(comment.section))}</strong><br>${escapeHtml(comment.author || 'Reviewer')} · ${escapeHtml(date)}</div>
+              <p>${escapeHtml(comment.text)}</p>
+              <button class="comment-delete" type="button" data-delete-comment="${escapeHtml(comment.id)}">Delete</button>
+            </article>
+          `;
+        }).join('');
+        updateCommentBadges();
+      }
+
+      function downloadReviewedHtml() {
+        const clone = document.documentElement.cloneNode(true);
+        const dataNode = clone.querySelector('#initial-comments-data');
+        if (dataNode) {
+          dataNode.textContent = JSON.stringify(comments, null, 2).replace(/<\//g, '<\\/');
+        }
+        const clonedDrawer = clone.querySelector('#comment-drawer');
+        const clonedBackdrop = clone.querySelector('#drawer-backdrop');
+        if (clonedDrawer) clonedDrawer.classList.remove('open');
+        if (clonedBackdrop) clonedBackdrop.classList.remove('open');
+        const fileContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+        const blob = new Blob([fileContent], { type: 'text/html;charset=utf-8' });
+        const link = document.createElement('a');
+        const date = new Date().toISOString().slice(0, 10);
+        link.href = URL.createObjectURL(blob);
+        link.download = 'pricing_in_action_reviewed_' + date + '.htm';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      }
+
+      populateSectionSelect();
+      authorInput.value = localStorage.getItem(authorKey) || '';
+      renderComments();
+
+      document.getElementById('open-comments-top').addEventListener('click', () => openDrawer());
+      document.getElementById('close-comments').addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+      document.querySelectorAll('.comment-action[data-comment-target]').forEach(button => {
+        button.addEventListener('click', () => openDrawer(button.getAttribute('data-comment-target')));
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const text = commentText.value.trim();
+        if (!text) return;
+        const author = authorInput.value.trim();
+        try { localStorage.setItem(authorKey, author); } catch (error) {}
+        comments.push({
+          id: 'c-' + Date.now() + '-' + Math.random().toString(16).slice(2),
+          section: sectionSelect.value,
+          author: author || 'Reviewer',
+          text: text,
+          createdAt: new Date().toISOString()
+        });
+        commentText.value = '';
+        saveComments();
+        renderComments();
+      });
+      commentList.addEventListener('click', event => {
+        const button = event.target.closest('[data-delete-comment]');
+        if (!button) return;
+        const id = button.getAttribute('data-delete-comment');
+        comments = comments.filter(comment => comment.id !== id);
+        saveComments();
+        renderComments();
+      });
+      document.getElementById('download-reviewed-html').addEventListener('click', downloadReviewedHtml);
+      document.getElementById('clear-comments').addEventListener('click', () => {
+        if (!comments.length) return;
+        if (!window.confirm('Clear all saved comments?')) return;
+        comments = [];
+        saveComments();
+        renderComments();
+      });
+      document.querySelectorAll('.tab-button[data-tab]').forEach(button => {
+        button.addEventListener('click', () => {
+          const tab = button.getAttribute('data-tab');
+          document.querySelectorAll('.tab-button[data-tab]').forEach(item => item.classList.toggle('active', item === button));
+          document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === 'tab-' + tab));
+        });
+      });
+
+      document.querySelectorAll('[data-expand-calendar]').forEach(button => {
+        button.addEventListener('click', () => {
+          const tab = button.getAttribute('data-expand-calendar');
+          const panel = document.getElementById('tab-' + tab);
+          if (!panel) return;
+          const view = panel.querySelector('.calendar-view');
+          if (!view) return;
+          const expanded = view.classList.toggle('calendar-expanded');
+          button.textContent = expanded ? 'Hide full calendar' : 'See full calendar';
+        });
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeDrawer();
+      });
+    })();
+  </script>
+</body></html>
